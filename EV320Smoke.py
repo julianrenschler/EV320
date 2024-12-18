@@ -122,6 +122,8 @@ while time <= totaltime: #While loop. Model run each hour until
         ax.set_xlabel('Longitude (ºW)')
         ax.set_ylabel('Latitude (ºN)')
         ax.set_title('Start of fire')
+        finalz = ax.pcolormesh(X, Y, Z)
+        fig.colorbar(finalz, label = 'Concentration') #add color bar to better visualize differences in concentration
         
     if time == totaltime: #plot smoke after total time
         Z = z.reshape(X.shape)
@@ -131,6 +133,9 @@ while time <= totaltime: #While loop. Model run each hour until
         ax.set_xlabel('Longitude (ºW)') #label all axises and add title
         ax.set_ylabel('Latitude (ºN)')
         ax.set_title('Final Condition')
+        finalz = ax.pcolormesh(X, Y, Z)
+        fig.colorbar(finalz, label = 'Concentration') #add color bar to better visualize differences in concentration
+        fig.savefig('WA_Wildfire_Smoke.png') #save figure for upload
         
     Z[(x==float(lat)),(y==float(long))] = 100 #the fire is still burning so continue to add smoke to the environment
     time += dt #add one hour to the total time
